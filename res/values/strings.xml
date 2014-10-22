@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">flightsOfAngels</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="createPoll">Create Poll</string>
+    <string name="joinExistingPoll">Join Existing Poll</string>
+    <string name="title_activity_display_message">DisplayMessageActivity</string>
+
+</resources>

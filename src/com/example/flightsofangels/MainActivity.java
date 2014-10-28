@@ -36,11 +36,20 @@ public class MainActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void sendMessage(View view)
+	public void createPoll(View view)
 	{
 		
-		Intent intent = new Intent (this, DisplayMessageActivity.class);
-		intent.putExtra(EXTRA_MESSAGE, "Clicked a button");
+		Intent intent = new Intent (this, CreatePollActivity.class);
+		intent.putExtra(EXTRA_MESSAGE, "Create a new poll");
+		// We need to define a new class. Still thinking how to do that.
 		startActivity(intent);
+	}
+	
+	public void joinPoll(View view)
+	{
+		Intent intent=new Intent(this, JoinPollActivity.class);
+		intent.putExtra(EXTRA_MESSAGE, "Join poll activity has been launched");
+		startActivity(intent);
+		//In this case, many polls already exist and the user has to join one extra poll
 	}
 }

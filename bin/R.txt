@@ -319,10 +319,12 @@ int layout abc_screen 0x7f030015
 int layout abc_search_dropdown_item_icons_2line 0x7f030016
 int layout abc_search_view 0x7f030017
 int layout activity_display_message 0x7f030018
-int layout activity_main 0x7f030019
-int layout support_simple_spinner_dropdown_item 0x7f03001a
+int layout activity_join_poll 0x7f030019
+int layout activity_main 0x7f03001a
+int layout support_simple_spinner_dropdown_item 0x7f03001b
 int menu display_message 0x7f0c0000
-int menu main 0x7f0c0001
+int menu join_poll 0x7f0c0001
+int menu main 0x7f0c0002
 int string abc_action_bar_home_description 0x7f0a0001
 int string abc_action_bar_up_description 0x7f0a0002
 int string abc_action_menu_overflow_description 0x7f0a0003
@@ -342,6 +344,7 @@ int string createPoll 0x7f0a0010
 int string hello_world 0x7f0a000e
 int string joinExistingPoll 0x7f0a0011
 int string title_activity_display_message 0x7f0a0012
+int string title_activity_join_poll 0x7f0a0013
 int style AppBaseTheme 0x7f0b007f
 int style AppTheme 0x7f0b0080
 int style TextAppearance_AppCompat_Base_CompactMenu_Dialog 0x7f0b0061

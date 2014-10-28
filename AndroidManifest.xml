@@ -23,8 +23,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DisplayMessageActivity"
+            android:name=".CreatePollActivity"
             android:label="@string/title_activity_display_message" >
+        </activity>
+        <activity
+            android:name=".JoinPollActivity"
+            android:label="@string/title_activity_join_poll" >
         </activity>
     </application>
 

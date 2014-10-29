@@ -8,6 +8,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.flightsofangels.CreatePollActivity" >
 
+    <!-- <EditText -->
+    <!-- android:id="@+id/line_number_2" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:hint="@string/line_number" /> -->
+
+    <EditText
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/question" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

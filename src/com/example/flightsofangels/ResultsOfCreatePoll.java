@@ -16,6 +16,7 @@ public class ResultsOfCreatePoll extends ActionBarActivity {
 		TextView textview=new TextView(this);
 		textview.setTextSize(40);
 		textview.setText("Results of the poll are as follows:-");
+		setContentView(textview);
 	}
 
 	@Override

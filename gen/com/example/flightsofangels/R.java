@@ -993,7 +993,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f05002f;
         public static final int action_mode_bar_stub=0x7f05002e;
         public static final int action_mode_close_button=0x7f050022;
-        public static final int action_settings=0x7f050042;
+        public static final int action_settings=0x7f050043;
         public static final int activity_chooser_view_content=0x7f050023;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1021,6 +1021,7 @@ containing a value of this type.
         public static final int normal=0x7f050000;
         public static final int progress_circular=0x7f050034;
         public static final int progress_horizontal=0x7f050035;
+        public static final int question=0x7f050042;
         public static final int radio=0x7f05002d;
         public static final int right_container=0x7f050032;
         public static final int right_icon=0x7f050033;
@@ -1156,6 +1157,7 @@ containing a value of this type.
         public static final int createPoll=0x7f0a0010;
         public static final int hello_world=0x7f0a000e;
         public static final int joinExistingPoll=0x7f0a0011;
+        public static final int question=0x7f0a0016;
         public static final int submit_button=0x7f0a0015;
         public static final int title_activity_display_message=0x7f0a0012;
         public static final int title_activity_join_poll=0x7f0a0013;

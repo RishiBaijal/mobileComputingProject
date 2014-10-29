@@ -25,6 +25,15 @@ public class JoinPollActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.join_poll, menu);
 		return true;
 	}
+	
+	public int getNumberOfCandidates()
+	{
+		int x=4;
+		/*This function will iterate over the list of people who are regsitered,
+		 * and print the results
+		*/
+		return x;
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

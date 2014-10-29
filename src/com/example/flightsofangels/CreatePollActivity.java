@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 //This is the file that I will be working on next
@@ -23,6 +24,7 @@ public class CreatePollActivity extends ActionBarActivity {
 //		textview.setText(s);
 //		setContentView(textview);
 		setContentView(R.layout.activity_display_message);
+		
 	}
 
 	public String getPollTitle() {
@@ -41,7 +43,9 @@ public class CreatePollActivity extends ActionBarActivity {
 		/*At this point, we need to pass the intent the results of the data that is being
 		 *  displayed. As of now, I am just passing it a string. I will see how to handle the rest later on.
 		 */
-		intent.putExtra(EXTRA_MESSAGE,"Displaying results of the new poll:");
+		//intent.putExtra(EXTRA_MESSAGE,"Displaying results of the new poll:");
+		EditText editText=(EditText) findViewById(R.id.question);
+		intent.putExtra(EXTRA_MESSAGE, editText.toString());
 		startActivity(intent);
 	}
 
@@ -51,6 +55,7 @@ public class CreatePollActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.display_message, menu);
 		return true;
 	}
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

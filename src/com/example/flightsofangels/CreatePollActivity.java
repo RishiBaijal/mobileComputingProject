@@ -1,22 +1,48 @@
 package com.example.flightsofangels;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
 //This is the file that I will be working on next
 public class CreatePollActivity extends ActionBarActivity {
-
+	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_display_message);
 		
-		TextView textview=new TextView(this);
-		textview.setTextSize(40);
-		textview.setText("Create poll activity");
-		setContentView(textview);
+//
+//		TextView textview = new TextView(this);
+//		textview.setTextSize(40);
+//		String s = getPollTitle();
+//		textview.setText(s);
+//		setContentView(textview);
+		setContentView(R.layout.activity_display_message);
+	}
+
+	public String getPollTitle() {
+		int c = 0;
+		String s = "Poll " + c;// c is a dynamic counter which will later be
+								// stored on the database
+		c++;
+		return s;
+
+	}
+	
+	public void submit(View view)
+	{
+		//In this case, the poll results need to be submitted
+		Intent intent = new Intent (this, ResultsOfCreatePoll.class);
+		/*At this point, we need to pass the intent the results of the data that is being
+		 *  displayed. As of now, I am just passing it a string. I will see how to handle the rest later on.
+		 */
+		intent.putExtra(EXTRA_MESSAGE,"Displaying results of the new poll:");
+		startActivity(intent);
 	}
 
 	@Override
@@ -37,4 +63,6 @@ public class CreatePollActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	
 }

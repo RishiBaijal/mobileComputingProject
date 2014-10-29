@@ -30,6 +30,10 @@
             android:name=".JoinPollActivity"
             android:label="@string/title_activity_join_poll" >
         </activity>
+        <activity
+            android:name=".ResultsOfCreatePoll"
+            android:label="@string/title_activity_results_of_create_poll" >
+        </activity>
     </application>
 
 </manifest>

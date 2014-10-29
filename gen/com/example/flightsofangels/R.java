@@ -1101,12 +1101,14 @@ containing a value of this type.
         public static final int activity_display_message=0x7f030018;
         public static final int activity_join_poll=0x7f030019;
         public static final int activity_main=0x7f03001a;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
+        public static final int activity_results_of_create_poll=0x7f03001b;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
     }
     public static final class menu {
         public static final int display_message=0x7f0c0000;
         public static final int join_poll=0x7f0c0001;
         public static final int main=0x7f0c0002;
+        public static final int results_of_create_poll=0x7f0c0003;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1154,8 +1156,10 @@ containing a value of this type.
         public static final int createPoll=0x7f0a0010;
         public static final int hello_world=0x7f0a000e;
         public static final int joinExistingPoll=0x7f0a0011;
+        public static final int submit_button=0x7f0a0015;
         public static final int title_activity_display_message=0x7f0a0012;
         public static final int title_activity_join_poll=0x7f0a0013;
+        public static final int title_activity_results_of_create_poll=0x7f0a0014;
     }
     public static final class style {
         /** 

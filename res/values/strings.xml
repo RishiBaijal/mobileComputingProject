@@ -8,5 +8,7 @@
     <string name="joinExistingPoll">Join Existing Poll</string>
     <string name="title_activity_display_message">DisplayMessageActivity</string>
     <string name="title_activity_join_poll">JoinPollActivity</string>
+    <string name="title_activity_results_of_create_poll">ResultsOfCreatePoll</string>
+    <string name="submit_button">Submit</string>
 
 </resources>

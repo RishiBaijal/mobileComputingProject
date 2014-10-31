@@ -239,10 +239,11 @@ int id action_menu_presenter 0x7f050017
 int id action_mode_bar 0x7f05002f
 int id action_mode_bar_stub 0x7f05002e
 int id action_mode_close_button 0x7f050022
-int id action_settings 0x7f050043
+int id action_settings 0x7f050044
 int id activity_chooser_view_content 0x7f050023
 int id always 0x7f05000b
 int id beginning 0x7f050011
+int id buttonlayout 0x7f050043
 int id checkbox 0x7f05002b
 int id collapseActionView 0x7f05000d
 int id default_activity_button 0x7f050026

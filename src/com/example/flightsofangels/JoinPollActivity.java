@@ -2,17 +2,13 @@ package com.example.flightsofangels;
 
 import java.util.ArrayList;
 
-import android.support.v7.app.ActionBarActivity;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.RadioButton;
 
 public class JoinPollActivity extends ActionBarActivity {
 
@@ -21,52 +17,73 @@ public class JoinPollActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_join_poll);
 
-		TextView textview = new TextView(this);
-		textview.setTextSize(40);
-		// textview.setText("Join poll Activity");
-		
-		int i;
-		String s = "";
-		final LinearLayout lm=(LinearLayout) findViewById(R.id.buttonlayout);
-		ArrayList<String> arr = getPollsInNetwork();
-		for (i = 0; i < arr.size(); i++) {
-			/*
-			 * Button button=new Button(this); s+=arr.get(i)+"\n";
-			 * button.setText(s); LinearLayout ll=(LinearLayout)
-			 * findViewById(R.id.buttonlayout); LayoutParams lp=new
-			 * LayoutParams(LayoutParams.MATCH_PARENT,
-			 * LayoutParams.WRAP_CONTENT); ll.addView(button, lp);
-			 */
-//			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//					LinearLayout.LayoutParams.MATCH_PARENT,
-//					LinearLayout.LayoutParams.WRAP_CONTENT);
-			LinearLayout ll=new LinearLayout(this);
-			LayoutParams params=new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-			Button btn=new Button(this);
-			btn.setId(i);
-			int id=btn.getId();
-			btn.setText(s);
-			btn.setBackgroundColor(Color.rgb(80, 80, 80));
-			ll.addView(btn, params);
-			Button btn1=(Button) findViewById(id);
-			btn1.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Toast.makeText(v.getContext(),
-		                    "Poll successfully selected", Toast.LENGTH_SHORT)
-		                    .show();
+		// TextView textview = new TextView(this);
+		// textview.setTextSize(40);
+		// // textview.setText("Join poll Activity");
+		//
+		// int i;
+		// String s = "";
+		// final LinearLayout lm=(LinearLayout) findViewById(R.id.buttonlayout);
+		 ArrayList<String> arr = getPollsInNetwork();
+		 addRadioButtons(arr.size(), "Radio button #");
+		// for (i = 0; i < arr.size(); i++) {
+		/*
+		 * Button button=new Button(this); s+=arr.get(i)+"\n";
+		 * button.setText(s); LinearLayout ll=(LinearLayout)
+		 * findViewById(R.id.buttonlayout); LayoutParams lp=new
+		 * LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		 * ll.addView(button, lp);
+		 */
+		// LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+		// LinearLayout.LayoutParams.MATCH_PARENT,
+		// LinearLayout.LayoutParams.WRAP_CONTENT);
+		// LinearLayout ll = new LinearLayout(this);
+		// LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
+		// LayoutParams.WRAP_CONTENT);
+		// Button btn = new Button(this);
+		// btn.setId(i);
+		// int id = btn.getId();
+		// btn.setText(s);
+		// btn.setBackgroundColor(Color.rgb(80, 80, 80));
+		// ll.addView(btn, params);
+		// Button btn1 = (Button) findViewById(id);
+		// btn1.setOnClickListener(new View.OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// // TODO Auto-generated method stub
+		// Toast.makeText(v.getContext(),
+		// "Poll successfully selected", Toast.LENGTH_SHORT)
+		// .show();
+		//
+		// }
+		// });
+		// ll.addView(btn);
+		// lm.addView(ll);
 
-				}
-			});
-			ll.addView(btn);
-			lm.addView(ll);
+		// }
+		// textview.setText(s);
+		// setContentView(textview);
 
+	}
+
+	public void addRadioButtons(int number, String text) {
+		int i, row;
+		for (row = 0; row < 1; row++) {
+			LinearLayout ll = new LinearLayout(this);
+			ll.setOrientation(LinearLayout.VERTICAL);
+			 for (i=1; i<=number; i++)
+			 {
+				 RadioButton radio=new RadioButton(this);
+				 radio.setId(row*2 + i);
+				 radio.setText(text + radio.getId()); 
+				 ll.addView(radio);
+			 }
+			 
+			 ((ViewGroup) findViewById(R.id.radiogroup)).addView(ll);
+			
 		}
-		textview.setText(s);
-		setContentView(textview);
-		
+
 	}
 
 	@Override

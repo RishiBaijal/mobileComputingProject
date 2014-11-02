@@ -29,8 +29,7 @@ public class JoinPollActivity extends ActionBarActivity {
 		// TextView textview = new TextView(this);
 		// textview.setTextSize(40);
 		// // textview.setText("Join poll Activity");
-		//
-		// int i;
+
 		// String s = "";
 		// final LinearLayout lm=(LinearLayout) findViewById(R.id.buttonlayout);
 		ArrayList<String> arr = getPollsInNetwork();

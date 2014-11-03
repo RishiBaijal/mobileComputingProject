@@ -25,13 +25,6 @@ public class JoinPollActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_join_poll);
-
-		// TextView textview = new TextView(this);
-		// textview.setTextSize(40);
-		// // textview.setText("Join poll Activity");
-
-		// String s = "";
-		// final LinearLayout lm=(LinearLayout) findViewById(R.id.buttonlayout);
 		ArrayList<String> arr = getPollsInNetwork();
 		int number = arr.size();
 		int i, row;

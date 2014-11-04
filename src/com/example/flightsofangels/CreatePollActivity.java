@@ -40,6 +40,7 @@ public class CreatePollActivity extends ActionBarActivity {
 	{
 		//In this case, the poll results need to be submitted
 		Intent intent = new Intent (this, ResultsOfCreatePoll.class);
+		Intent intent1=new Intent(this, JoinPollActivity.class);
 		/*At this point, we need to pass the intent the results of the data that is being
 		 *  displayed. As of now, I am just passing it a string. I will see how to handle the rest later on.
 		 */
@@ -47,6 +48,7 @@ public class CreatePollActivity extends ActionBarActivity {
 		EditText editText=(EditText) findViewById(R.id.question);
 		String s=editText.getText().toString();
 		intent.putExtra(EXTRA_MESSAGE, s);
+		intent1.putExtra(EXTRA_MESSAGE, s);
 		startActivity(intent);
 	}
 

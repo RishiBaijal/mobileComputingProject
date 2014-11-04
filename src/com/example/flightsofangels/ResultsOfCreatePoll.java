@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 public class ResultsOfCreatePoll extends ActionBarActivity {
 
+	public static final String EXTRA_MESSAGE = "abc";
+	static String message="";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -18,7 +20,7 @@ public class ResultsOfCreatePoll extends ActionBarActivity {
 		textview.setTextSize(40);
 		textview.setText("Results of the poll are as follows:-");
 		Intent intent=getIntent();
-		String message=intent.getStringExtra(CreatePollActivity.EXTRA_MESSAGE);
+		message=intent.getStringExtra(CreatePollActivity.EXTRA_MESSAGE);
 		textview.setText(message);
 		setContentView(textview);
 	}

@@ -36,7 +36,7 @@ public class JoinPollActivity extends ActionBarActivity {
 			for (i = 1; i <= number; i++) {
 				radio = new Button(this);
 				radio.setId(row * 2 + i);
-				radio.setText("Poll # " + radio.getId());
+				radio.setText(arr.get(i-1));
 				radio.setOnClickListener(new OnClickListener(){
 
 					@Override
@@ -146,7 +146,9 @@ public class JoinPollActivity extends ActionBarActivity {
 
 	public ArrayList<String> getPollsInNetwork() {
 		ArrayList<String> arr = new ArrayList<String>();
-		arr.add("Sample poll 1");
+		Intent intent1=getIntent();
+		String s=intent1.getStringExtra(CreatePollActivity.EXTRA_MESSAGE);
+		arr.add(s);
 		arr.add("Sample poll 2");
 		// Change this function later to connect to the network and actually get
 		// the number of polls that have been created

@@ -45,7 +45,8 @@ public class CreatePollActivity extends ActionBarActivity {
 		 */
 		//intent.putExtra(EXTRA_MESSAGE,"Displaying results of the new poll:");
 		EditText editText=(EditText) findViewById(R.id.question);
-		intent.putExtra(EXTRA_MESSAGE, editText.toString());
+		String s=editText.getText().toString();
+		intent.putExtra(EXTRA_MESSAGE, s);
 		startActivity(intent);
 	}
 

@@ -1,6 +1,7 @@
 package com.example.flightsofangels;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,9 @@ public class ResultsOfCreatePoll extends ActionBarActivity {
 		TextView textview=new TextView(this);
 		textview.setTextSize(40);
 		textview.setText("Results of the poll are as follows:-");
+		Intent intent=getIntent();
+		String message=intent.getStringExtra(CreatePollActivity.EXTRA_MESSAGE);
+		textview.setText(message);
 		setContentView(textview);
 	}
 

@@ -13,13 +13,13 @@ public class OngoingPolls extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ongoing_polls);
-		Intent intent=getIntent();
-		String message=intent.getStringExtra(JoinPollActivity.EXTRA_MESSAGE);
-		TextView textview=new TextView(this);
+		Intent intent = getIntent();
+		String message = intent.getStringExtra(JoinPollActivity.EXTRA_MESSAGE);
+		TextView textview = new TextView(this);
 		textview.setTextSize(32);
 		textview.setText(message);
 		setContentView(textview);
-		
+
 	}
 
 	@Override

@@ -115,7 +115,6 @@ public class JoinPollActivity extends ActionBarActivity {
 	// ((ViewGroup) findViewById(R.id.radiogroup)).addView(ll);
 	//
 	// }
-	//
 	// }
 
 	public void submitted(View view) {
@@ -148,7 +147,7 @@ public class JoinPollActivity extends ActionBarActivity {
 		ArrayList<String> arr = new ArrayList<String>();
 		Intent intent1=getIntent();
 		String s=intent1.getStringExtra(CreatePollActivity.EXTRA_MESSAGE);
-		arr.add(s);
+		arr.add("Sample poll 1");
 		arr.add("Sample poll 2");
 		// Change this function later to connect to the network and actually get
 		// the number of polls that have been created

@@ -10,7 +10,7 @@
     <string name="title_activity_join_poll">JoinPollActivity</string>
     <string name="title_activity_results_of_create_poll">ResultsOfCreatePoll</string>
     <string name="submit_button">Submit</string>
-    <string name="question">Who you gonna call?</string>
+    <string name="question">New poll</string>
     <string name="title_activity_ongoing_polls">OngoingPolls</string>
 
 </resources>

@@ -44,6 +44,14 @@
             android:name=".OngoingPolls"
             android:label="@string/title_activity_ongoing_polls" >
         </activity>
+        <activity
+            android:name=".MyWiFiActivity"
+            android:label="@string/title_activity_my_wi_fi" >
+        </activity>
+        <activity
+            android:name=".DeviceListFragment"
+            android:label="@string/title_activity_device_list_fragment" >
+        </activity>
     </application>
 
 </manifest>

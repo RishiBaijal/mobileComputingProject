@@ -12,5 +12,7 @@
     <string name="submit_button">Submit</string>
     <string name="question">New poll</string>
     <string name="title_activity_ongoing_polls">OngoingPolls</string>
+    <string name="title_activity_my_wi_fi">MyWiFiActivity</string>
+    <string name="title_activity_device_list_fragment">DeviceListFragment</string>
 
 </resources>

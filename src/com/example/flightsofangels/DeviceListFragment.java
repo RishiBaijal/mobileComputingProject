@@ -24,7 +24,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeviceListFragment extends ActionBarActivity {
+public class DeviceListFragment extends ListFragment implements
+		PeerListListener {
+
+	private WifiP2pDevice device;
+	private List<WifiP2pDevice> peers=new ArrayList<WifiP2pDevice>();
 	public interface DeviceActionListener {
 
 		void showDetails(WifiP2pDevice device);
@@ -36,17 +40,15 @@ public class DeviceListFragment extends ActionBarActivity {
 		void disconnect();
 	}
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_device_list_fragment);
-	}
+	// @Override
+	// protected void onCreate(Bundle savedInstanceState) {
+	// super.onCreate(savedInstanceState);
+	// setContentView(R.layout.activity_device_list_fragment);
+	// }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.device_list, menu);
-		return true;
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		this.setListAdapter(new WiFiPeerListAdapter(getActivity(), R.layout.row_devices, peers));
 	}
 
 	@Override
@@ -59,5 +61,30 @@ public class DeviceListFragment extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public WifiP2pDevice getDevice() {
+		return device;
+	}
+
+	@Override
+	public void onPeersAvailable(WifiP2pDeviceList peers) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	private class WiFiPeerListAdapter extends ArrayAdapter<WifiP2pDevice>
+	{
+
+		
+		private List<WifiP2pDevice> items;
+		public WiFiPeerListAdapter(Context context, int resource, List<WifiP2pDevice> items) {
+			super(context, resource, items);
+			this.items=items;
+			
+		}
+		
+		
+		
 	}
 }

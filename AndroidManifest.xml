@@ -52,6 +52,10 @@
             android:name=".DeviceListFragment"
             android:label="@string/title_activity_device_list_fragment" >
         </activity>
+        <activity
+            android:name=".DeviceDetailFragment"
+            android:label="@string/title_activity_device_detail_fragment" >
+        </activity>
     </application>
 
 </manifest>

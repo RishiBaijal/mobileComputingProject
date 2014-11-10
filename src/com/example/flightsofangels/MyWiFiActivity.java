@@ -21,6 +21,20 @@ public class MyWiFiActivity extends Activity implements ChannelListener, DeviceA
 	WifiP2pManager mManager;
 	Channel mChannel;
 	BroadcastReceiver mReceiver;
+	
+	public static final String tag="mywifiactivity";
+	private WifiP2pManager manager;
+	private boolean wifiP2pEnabled=true;
+	
+	
+	public boolean isWifiP2pEnabled() {
+		return wifiP2pEnabled;
+	}
+
+	public void setWifiP2pEnabled(boolean wifiP2pEnabled) {
+		this.wifiP2pEnabled = wifiP2pEnabled;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,4 +91,5 @@ public class MyWiFiActivity extends Activity implements ChannelListener, DeviceA
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

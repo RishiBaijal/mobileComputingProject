@@ -29,6 +29,8 @@ public class DeviceListFragment extends ListFragment implements
 
 	private WifiP2pDevice device;
 	private List<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
+	View mContentView = null;
+	ProgressDialog progressDialog = null;
 
 	public interface DeviceActionListener {
 
@@ -70,27 +72,57 @@ public class DeviceListFragment extends ListFragment implements
 	}
 
 	@Override
-	public void onPeersAvailable(WifiP2pDeviceList peers) {
-		// TODO Auto-generated method stub
+	public void onPeersAvailable(WifiP2pDeviceList peerList) {
+		if (progressDialog != null && progressDialog.isShowing()) {
+			progressDialog.dismiss();
+		}
+		peers.clear();
+		peers.addAll(peerList.getDeviceList());
+		((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
+		if (peers.size() == 0) {
+			Log.d(MyWiFiActivity.tag, "No devices found");
+			return;
+		}
 
 	}
 
-	private static String getDeviceStatus(int deviceStatus)
-	{
-		Log.d(MyWiFiActivity.tag, "The peer status is "+ deviceStatus );
-		String s="Unknown";
-		if (deviceStatus==WifiP2pDevice.AVAILABLE)
-			s="Available";
-		if (deviceStatus==WifiP2pDevice.INVITED)
-			s="Invited";
-		if (deviceStatus==WifiP2pDevice.CONNECTED)
-			s="Connected";
-		if (deviceStatus==WifiP2pDevice.UNAVAILABLE)
-			s="Unavailable";
-		if (deviceStatus==WifiP2pDevice.FAILED)
-			s="Failed";
+	public void clearPeers() {
+		peers.clear();
+		((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
+	}
+
+	public void onInitiateDiscovery() {
+		if (progressDialog != null && progressDialog.isShowing()) {
+			progressDialog.dismiss();
+		}
+		progressDialog = ProgressDialog.show(getActivity(),
+				"Press the back button to cancel", "Searching for peers", true, true, new DialogInterface.OnCancelListener() {
+					
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						//We need to figure out what we do here
+						
+					}
+				});
+		
+	}
+
+	private static String getDeviceStatus(int deviceStatus) {
+		Log.d(MyWiFiActivity.tag, "The peer status is " + deviceStatus);
+		String s = "Unknown";
+		if (deviceStatus == WifiP2pDevice.AVAILABLE)
+			s = "Available";
+		if (deviceStatus == WifiP2pDevice.INVITED)
+			s = "Invited";
+		if (deviceStatus == WifiP2pDevice.CONNECTED)
+			s = "Connected";
+		if (deviceStatus == WifiP2pDevice.UNAVAILABLE)
+			s = "Unavailable";
+		if (deviceStatus == WifiP2pDevice.FAILED)
+			s = "Failed";
 		return s;
 	}
+
 	private class WiFiPeerListAdapter extends ArrayAdapter<WifiP2pDevice> {
 
 		private List<WifiP2pDevice> items;
@@ -109,23 +141,29 @@ public class DeviceListFragment extends ListFragment implements
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = vi.inflate(R.layout.row_devices, null);
 			}
-			WifiP2pDevice device=items.get(position);
-			if (device != null)
-			{
-				TextView top=(TextView) v.findViewById(R.id.device_name);
-				TextView bottom=(TextView) v.findViewById(R.id.device_details);
-				if (top!=null)
-				{
+			WifiP2pDevice device = items.get(position);
+			if (device != null) {
+				TextView top = (TextView) v.findViewById(R.id.device_name);
+				TextView bottom = (TextView) v
+						.findViewById(R.id.device_details);
+				if (top != null) {
 					top.setText(device.deviceName);
 				}
-				if (bottom != null)
-				{
+				if (bottom != null) {
 					bottom.setText(getDeviceStatus(device.status));
 				}
 			}
 			return v;
 
 		}
-
 	}
+
+	public void updateThisDevice(WifiP2pDevice device) {
+		this.device = device;
+		TextView view = (TextView) mContentView.findViewById(R.id.my_name);
+		view.setText(device.deviceName);
+		view = (TextView) mContentView.findViewById(R.id.my_status);
+		view.setText(getDeviceStatus(device.status));
+	}
+
 }

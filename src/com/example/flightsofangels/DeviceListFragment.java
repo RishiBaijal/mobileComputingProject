@@ -28,7 +28,8 @@ public class DeviceListFragment extends ListFragment implements
 		PeerListListener {
 
 	private WifiP2pDevice device;
-	private List<WifiP2pDevice> peers=new ArrayList<WifiP2pDevice>();
+	private List<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
+
 	public interface DeviceActionListener {
 
 		void showDetails(WifiP2pDevice device);
@@ -48,7 +49,8 @@ public class DeviceListFragment extends ListFragment implements
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		this.setListAdapter(new WiFiPeerListAdapter(getActivity(), R.layout.row_devices, peers));
+		this.setListAdapter(new WiFiPeerListAdapter(getActivity(),
+				R.layout.row_devices, peers));
 	}
 
 	@Override
@@ -72,19 +74,17 @@ public class DeviceListFragment extends ListFragment implements
 		// TODO Auto-generated method stub
 
 	}
-	
-	private class WiFiPeerListAdapter extends ArrayAdapter<WifiP2pDevice>
-	{
 
-		
+	private class WiFiPeerListAdapter extends ArrayAdapter<WifiP2pDevice> {
+
 		private List<WifiP2pDevice> items;
-		public WiFiPeerListAdapter(Context context, int resource, List<WifiP2pDevice> items) {
+
+		public WiFiPeerListAdapter(Context context, int resource,
+				List<WifiP2pDevice> items) {
 			super(context, resource, items);
-			this.items=items;
-			
+			this.items = items;
+
 		}
-		
-		
-		
+
 	}
 }

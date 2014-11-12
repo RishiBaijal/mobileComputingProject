@@ -75,6 +75,22 @@ public class DeviceListFragment extends ListFragment implements
 
 	}
 
+	private static String getDeviceStatus(int deviceStatus)
+	{
+		Log.d(MyWiFiActivity.tag, "The peer status is "+ deviceStatus );
+		String s="Unknown";
+		if (deviceStatus==WifiP2pDevice.AVAILABLE)
+			s="Available";
+		if (deviceStatus==WifiP2pDevice.INVITED)
+			s="Invited";
+		if (deviceStatus==WifiP2pDevice.CONNECTED)
+			s="Connected";
+		if (deviceStatus==WifiP2pDevice.UNAVAILABLE)
+			s="Unavailable";
+		if (deviceStatus==WifiP2pDevice.FAILED)
+			s="Failed";
+		return s;
+	}
 	private class WiFiPeerListAdapter extends ArrayAdapter<WifiP2pDevice> {
 
 		private List<WifiP2pDevice> items;
@@ -83,6 +99,31 @@ public class DeviceListFragment extends ListFragment implements
 				List<WifiP2pDevice> items) {
 			super(context, resource, items);
 			this.items = items;
+
+		}
+
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View v = convertView;
+			if (v == null) {
+				LayoutInflater vi = (LayoutInflater) getActivity()
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				v = vi.inflate(R.layout.row_devices, null);
+			}
+			WifiP2pDevice device=items.get(position);
+			if (device != null)
+			{
+				TextView top=(TextView) v.findViewById(R.id.device_name);
+				TextView bottom=(TextView) v.findViewById(R.id.device_details);
+				if (top!=null)
+				{
+					top.setText(device.deviceName);
+				}
+				if (bottom != null)
+				{
+					bottom.setText(getDeviceStatus(device.status));
+				}
+			}
+			return v;
 
 		}
 

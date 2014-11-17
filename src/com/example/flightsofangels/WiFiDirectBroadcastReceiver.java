@@ -39,7 +39,6 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
 				mActivity.setWifiP2pEnabled(true);
 			} else {
 				mActivity.setWifiP2pEnabled(false);
-				mActivity.resetData();
 			}
 
 		} else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {

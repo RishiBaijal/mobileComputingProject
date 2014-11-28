@@ -1,5 +1,6 @@
 package com.example.flightsofangels;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -133,6 +134,51 @@ public class WiFiDirectTestAppActivity extends Activity {
 		FileServerAsyncTask obj = new FileServerAsyncTask();
 		addLog("Calling Async execute");
 		obj.execute();
+	}
+
+	class FileClientAsyncTask extends AsyncTask<Void, Void, Void> {
+		String destAddress;
+		int destPort;
+		String response;
+
+		FileClientAsyncTask(String destAddress, int destPort) {
+			this.destAddress = destAddress;
+			this.destPort = destPort;
+
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			Socket socket = null;
+			try {
+				socket = new Socket(destAddress, destPort);
+				ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
+						1024);
+				byte buffer[] = new byte[1024];
+				InputStream inputStream = socket.getInputStream();
+				int bytesRead=-1;
+				do {
+					bytesRead = inputStream.read(buffer);
+					byteArrayOutputStream.write(buffer, 0, bytesRead);
+					response+=byteArrayOutputStream.toString("UTF-8");
+				} while (bytesRead != -1);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				WiFiDirectTestAppActivity.this.addLog(e.toString());
+				response="Exception " + e.toString();
+
+			}
+			return null;
+		}
+		
+		protected void onPostExecute(Void result)
+		{
+			WiFiDirectTestAppActivity.this.addLog("In onPostExecute()");
+			super.onPostExecute(result);
+		}
+
 	}
 
 	class FileServerAsyncTask extends AsyncTask<Void, String, String> {

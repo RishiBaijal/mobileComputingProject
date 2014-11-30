@@ -1774,11 +1774,13 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030014;
         public static final int abc_search_view=0x7f030015;
         public static final int abc_simple_dropdown_hint=0x7f030016;
-        public static final int main=0x7f030017;
-        public static final int support_simple_spinner_dropdown_item=0x7f030018;
+        public static final int activity_client=0x7f030017;
+        public static final int main=0x7f030018;
+        public static final int support_simple_spinner_dropdown_item=0x7f030019;
     }
     public static final class menu {
-        public static final int wi_fi_direct_test_app=0x7f0d0000;
+        public static final int client=0x7f0d0000;
+        public static final int wi_fi_direct_test_app=0x7f0d0001;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1868,6 +1870,7 @@ containing a value of this type.
         public static final int spinner_go=0x7f0a0021;
         public static final int spinner_peers=0x7f0a001f;
         public static final int spinner_wps=0x7f0a0022;
+        public static final int title_activity_client=0x7f0a0033;
         public static final int title_activity_main=0x7f0a0030;
         public static final int transfer=0x7f0a002f;
     }

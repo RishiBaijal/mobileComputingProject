@@ -1148,6 +1148,7 @@ public class WiFiDirectTestAppActivity extends Activity {
 	private ActionListenerAdapter mActionListenerAdapter;
 	private Spinner mPeersSpinner;
 	private String mSelectedDevice;
+	int choice = 0;
 	private boolean f;
 
 	@Override
@@ -1230,47 +1231,46 @@ public class WiFiDirectTestAppActivity extends Activity {
 		// publishProgress("Written from my side. Baaki doosre ka dekh lo");
 	}
 
-//	class FileClientAsyncTask extends AsyncTask<Void, Void, Void> {
-//		String destAddress;
-//		int destPort;
-//		String response;
-//
-//		FileClientAsyncTask(String destAddress, int destPort) {
-//			this.destAddress = destAddress;
-//			this.destPort = destPort;
-//		}
-//
-//		@Override
-//		protected Void doInBackground(Void... params) {
-//			// TODO Auto-generated method stub
-//			Socket socket = null;
-//			try {
-//				socket = new Socket(destAddress, destPort);
-//				ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
-//						1024);
-//				byte buffer[] = new byte[1024];
-//				InputStream inputStream = socket.getInputStream();
-//				int bytesRead = -1;
-//				do {
-//					bytesRead = inputStream.read(buffer);
-//					byteArrayOutputStream.write(buffer, 0, bytesRead);
-//					response += byteArrayOutputStream.toString("UTF-8");
-//				} while (bytesRead != -1);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				WiFiDirectTestAppActivity.this.addLog(e.toString());
-//				response = "Exception " + e.toString();
-//			}
-//			return null;
-//		}
-//
-//		protected void onPostExecute(Void result) {
-//			WiFiDirectTestAppActivity.this.addLog("In onPostExecute()");
-//			super.onPostExecute(result);
-//		}
-//	}
+	// class FileClientAsyncTask extends AsyncTask<Void, Void, Void> {
+	// String destAddress;
+	// int destPort;
+	// String response;
+	//
+	// FileClientAsyncTask(String destAddress, int destPort) {
+	// this.destAddress = destAddress;
+	// this.destPort = destPort;
+	// }
+	//
+	// @Override
+	// protected Void doInBackground(Void... params) {
+	// // TODO Auto-generated method stub
+	// Socket socket = null;
+	// try {
+	// socket = new Socket(destAddress, destPort);
+	// ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
+	// 1024);
+	// byte buffer[] = new byte[1024];
+	// InputStream inputStream = socket.getInputStream();
+	// int bytesRead = -1;
+	// do {
+	// bytesRead = inputStream.read(buffer);
+	// byteArrayOutputStream.write(buffer, 0, bytesRead);
+	// response += byteArrayOutputStream.toString("UTF-8");
+	// } while (bytesRead != -1);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// WiFiDirectTestAppActivity.this.addLog(e.toString());
+	// response = "Exception " + e.toString();
+	// }
+	// return null;
+	// }
+	//
+	// protected void onPostExecute(Void result) {
+	// WiFiDirectTestAppActivity.this.addLog("In onPostExecute()");
+	// super.onPostExecute(result);
+	// }
+	// }
 
-	
 	class FileClientAsyncTask extends AsyncTask<Void, Void, Void> {
 		String destAddress;
 		int destPort;
@@ -1314,6 +1314,7 @@ public class WiFiDirectTestAppActivity extends Activity {
 		}
 
 	}
+
 	public void onClickRequestConnectionInfo(View view) {
 		addMethodLog("mWifiP2pManager.requestConnectionInfo()");
 		if (isNull(true)) {
@@ -1341,16 +1342,16 @@ public class WiFiDirectTestAppActivity extends Activity {
 		addLog("Calling Async execute");
 		obj.execute();
 	}
-	
-	public void replyBack(View view)
-	{
-		//FileClientAsyncTask obj=new FileClientAsyncTask();
+
+	public void replyBack(View view) {
+		// FileClientAsyncTask obj=new FileClientAsyncTask();
 		FileServerAsyncTask obj = new FileServerAsyncTask();
 		addLog("Calling Async execute from reply back");
 		obj.execute();
 	}
 
 	class FileServerAsyncTask extends AsyncTask<Void, String, String> {
+		boolean flag = false;
 		private Context context;
 		private TextView statusText;
 		Socket socket;
@@ -1383,7 +1384,7 @@ public class WiFiDirectTestAppActivity extends Activity {
 						publishProgress("Socket created");
 						// InputStream inputStream = client.getInputStream();
 						// String data = "These are the flying angels.";
-						EditText editText = (EditText) findViewById(R.id.string_to_transfer); 
+						EditText editText = (EditText) findViewById(R.id.string_to_transfer);
 						data = editText.getText().toString();
 						writeToSocket(client, data);
 						// int size = 1024;
@@ -1410,7 +1411,7 @@ public class WiFiDirectTestAppActivity extends Activity {
 				}
 
 			} else {
-//				Socket socket = null;
+				// Socket socket = null;
 				String response = "";
 
 				try {
@@ -1418,40 +1419,61 @@ public class WiFiDirectTestAppActivity extends Activity {
 					// publishProgress("before socket in client");
 					socket = new Socket("192.168.49.1", 8888);
 					String data = readFromSocket(socket);
+					// if (data.equals("`"))
+					// {
+					// publishProgress("This is tilde.");
+					// }
 					publishProgress("This is the data read from a client: "
 							+ data);
-					
-//				final Socket justWork=socket;
-					// Create a button and a text field right here. Write to the socket from the client right here. 
-					
-					Button createBtn = (Button) findViewById(R.id.button2);
-			        createBtn.setOnClickListener(new View.OnClickListener()
-			        {
-			            public void onClick (View v)
-			            {
-			                Context context = getApplicationContext();
-			                String text = ((EditText) findViewById(R.id.string_to_transfer)).getText().toString();
-			                int duration = Toast.LENGTH_SHORT;
-			                
-			                try {
-								publishProgress("Going to reply to GO with "+ text);
-			                	writeToSocket(socket, text);
-								publishProgress("Data has been written.");
+
+					// final Socket justWork=socket;
+					// Create a button and a text field right here. Write to the
+					// socket from the client right here.
+					if(choice==0)	
+					 {writeToSocket(socket, "`");
+					 choice =1;
+					 }
+					 Button createBtn = (Button) findViewById(R.id.button2);
+
+					createBtn.setOnClickListener(new View.OnClickListener() {
+						public void onClick(View v) {
+							Context context = getApplicationContext();
+							String text = ((EditText) findViewById(R.id.string_to_transfer))
+									.getText().toString();
+							int duration = Toast.LENGTH_SHORT;
+
+							try {
+								publishProgress("Going to reply to GO with "
+										+ text);
+								publishProgress("Before choice computations begin " + choice);
+								//if (choice == 0) {
+									//writeToSocket(socket, "~");
+									//publishProgress("in ch ==0" + choice);
+									//choice=1;
+									//publishProgress("in ch ==0 set choice as" + choice);
+								//}
+								if(choice ==1)
+								{
+									writeToSocket(socket, text);
+									publishProgress("Data has been written.");
+									publishProgress("in ch ==0 else parts" + choice);
+									choice = 0;
+									publishProgress("set ch =1 in else part only " + choice);
+								}
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								publishProgress("Exception in replying");
 								e.printStackTrace();
 							}
 
-			                Toast toast = Toast.makeText(context, text, duration);
-			                toast.show();
-			            }
-			        });
-			   
-					
+							Toast toast = Toast.makeText(context, text,
+									duration);
+							toast.show();
+						}
+					});
 
 					publishProgress("Return. ");
-					//socket.close();
+					// socket.close();
 					// publishProgress("after socket in client");
 					// ByteArrayOutputStream byteArrayOutputStream = new
 					// ByteArrayOutputStream(

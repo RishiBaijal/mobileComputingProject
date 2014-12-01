@@ -1116,6 +1116,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.ScrollView;
@@ -1174,45 +1175,100 @@ public class WiFiDirectTestAppActivity extends Activity {
 		// });
 	}
 
-	class FileClientAsyncTask extends AsyncTask<Void, Void, Void> {
-		String destAddress;
-		int destPort;
-		String response;
+	public String readFromSocket(Socket socket) throws Exception {
 
-		FileClientAsyncTask(String destAddress, int destPort) {
-			this.destAddress = destAddress;
-			this.destPort = destPort;
-		}
+		String response = "";
+		try {
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			Socket socket = null;
-			try {
-				socket = new Socket(destAddress, destPort);
-				ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
-						1024);
-				byte buffer[] = new byte[1024];
-				InputStream inputStream = socket.getInputStream();
+			// publishProgress("after socket in client");
+			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
+					10000);
+			// publishProgress("after byte array socket in client");
+			byte buffer[] = new byte[10000];
+			// publishProgress("after new byte[1024] in client");
+
+			InputStream inputStream = socket.getInputStream();
+
+			while (true) {
+				// publishProgress("after inputstream socket in client");
+				if (inputStream.available() == 0) {
+					continue;
+				}
 				int bytesRead = -1;
+				// publishProgress("before do in socket in client");
 				do {
 					bytesRead = inputStream.read(buffer);
 					byteArrayOutputStream.write(buffer, 0, bytesRead);
 					response += byteArrayOutputStream.toString("UTF-8");
+					// publishProgress("Publishing responses...");
+
+					// publishProgress(response);
+					bytesRead = -1;
 				} while (bytesRead != -1);
-			} catch (Exception e) {
-				e.printStackTrace();
-				WiFiDirectTestAppActivity.this.addLog(e.toString());
-				response = "Exception " + e.toString();
+				break;
+
 			}
-			return null;
+			// publishProgress("after loop socket in client");
+		} catch (Exception e) {
+			e.printStackTrace();
+			WiFiDirectTestAppActivity.this.addLog(e.toString());
+			response = "Exception " + e.toString();
 		}
 
-		protected void onPostExecute(Void result) {
-			WiFiDirectTestAppActivity.this.addLog("In onPostExecute()");
-			super.onPostExecute(result);
-		}
+		return response;
+
 	}
+
+	public void writeToSocket(Socket socket, String data) throws Exception {
+		int size = data.length();
+		byte arr[] = new byte[size];
+		arr = data.getBytes();
+		OutputStream outputStream = socket.getOutputStream();
+		// publishProgress("Stream ready to write");
+		outputStream.write(arr, 0, arr.length);
+
+		// publishProgress("Written from my side. Baaki doosre ka dekh lo");
+	}
+
+	// class FileClientAsyncTask extends AsyncTask<Void, Void, Void> {
+	// String destAddress;
+	// int destPort;
+	// String response;
+	//
+	// FileClientAsyncTask(String destAddress, int destPort) {
+	// this.destAddress = destAddress;
+	// this.destPort = destPort;
+	// }
+	//
+	// @Override
+	// protected Void doInBackground(Void... params) {
+	// // TODO Auto-generated method stub
+	// Socket socket = null;
+	// try {
+	// socket = new Socket(destAddress, destPort);
+	// ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
+	// 1024);
+	// byte buffer[] = new byte[1024];
+	// InputStream inputStream = socket.getInputStream();
+	// int bytesRead = -1;
+	// do {
+	// bytesRead = inputStream.read(buffer);
+	// byteArrayOutputStream.write(buffer, 0, bytesRead);
+	// response += byteArrayOutputStream.toString("UTF-8");
+	// } while (bytesRead != -1);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// WiFiDirectTestAppActivity.this.addLog(e.toString());
+	// response = "Exception " + e.toString();
+	// }
+	// return null;
+	// }
+	//
+	// protected void onPostExecute(Void result) {
+	// WiFiDirectTestAppActivity.this.addLog("In onPostExecute()");
+	// super.onPostExecute(result);
+	// }
+	// }
 
 	public void onClickRequestConnectionInfo(View view) {
 		addMethodLog("mWifiP2pManager.requestConnectionInfo()");
@@ -1262,22 +1318,35 @@ public class WiFiDirectTestAppActivity extends Activity {
 			// ServerSocket serverSocket;
 
 			if (f == true) {
-
+				ServerSocket serverSocket = null;
+				Socket client = null;
 				try {
 					publishProgress("I'm the background task inside the try block.");
-					ServerSocket serverSocket = new ServerSocket(8888);
-					publishProgress("Just create the socket!");
-					Socket client = serverSocket.accept();
-					publishProgress("Socket created");
-					InputStream inputStream = client.getInputStream();
-					String data = "These are the flying angels.";
-					int size = 1024;
-					byte arr[] = new byte[1024];
-					arr = data.getBytes();
-					OutputStream outputStream = client.getOutputStream();
-					publishProgress("Stream ready to write");
-					outputStream.write(arr, 0, arr.length);
-					publishProgress("Written from my side. Baaki doosre ka dekh lo");
+					serverSocket = new ServerSocket(8888);
+					String data = "";
+					while (true) {
+						publishProgress("Just create the socket!");
+						client = serverSocket.accept();
+						publishProgress("Socket created");
+						// InputStream inputStream = client.getInputStream();
+						// String data = "These are the flying angels.";
+						EditText editText = (EditText) findViewById(R.id.string_to_transfer);
+						data = editText.getText().toString();
+						writeToSocket(client, data);
+						// int size = 1024;
+						// byte arr[] = new byte[1024];
+						// arr = data.getBytes();
+						// OutputStream outputStream = client.getOutputStream();
+						// publishProgress("Stream ready to write");
+						// outputStream.write(arr, 0, arr.length);
+						publishProgress("Written from my side. Baaki doosre ka dekh lo");
+						publishProgress("Start reading from the client...");
+						publishProgress(readFromSocket(client));
+
+						client.close();
+						if (data.equals(""))// DOES THIS WORK LOL
+							break;// Fake break
+					}
 					return data;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -1286,39 +1355,56 @@ public class WiFiDirectTestAppActivity extends Activity {
 					publishProgress("Error in socket formation");
 					return null;
 				}
+
 			} else {
 				Socket socket = null;
 				String response = "";
-				try {
 
-					publishProgress("before socket in client");
+				try {
+					//
+					// publishProgress("before socket in client");
 					socket = new Socket("192.168.49.1", 8888);
-					publishProgress("after socket in client");
-					ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
-							1024);
-					publishProgress("after byte array socket in client");
-					byte buffer[] = new byte[1024];
-					publishProgress("after new byte[1024] in client");
-					InputStream inputStream = socket.getInputStream();
-					publishProgress("after inputstream socket in client");
-					int bytesRead = -1;
-					publishProgress("before do in socket in client");
-					do {
-						bytesRead = inputStream.read(buffer);
-						byteArrayOutputStream.write(buffer, 0, bytesRead);
-						response += byteArrayOutputStream.toString("UTF-8");
-						publishProgress("Publishing responses...");
-						publishProgress(response);
-					} while (bytesRead != -1);
-					publishProgress("after loop socket in client");
+					String data = readFromSocket(socket);
+					publishProgress("This is the data read from a client: "
+							+ data);
+					publishProgress("Data has been written.");
+					writeToSocket(socket,
+							"This is what I am writing to the socket from the client.");
+
+					publishProgress("Return. ");
+					socket.close();
+					// publishProgress("after socket in client");
+					// ByteArrayOutputStream byteArrayOutputStream = new
+					// ByteArrayOutputStream(
+					// 1024);
+					// publishProgress("after byte array socket in client");
+					// byte buffer[] = new byte[1024];
+					// publishProgress("after new byte[1024] in client");
+					// InputStream inputStream = socket.getInputStream();
+					// publishProgress("after inputstream socket in client");
+					// int bytesRead = -1;
+					// publishProgress("before do in socket in client");
+					// do {
+					// bytesRead = inputStream.read(buffer);
+					// byteArrayOutputStream.write(buffer, 0, bytesRead);
+					// response += byteArrayOutputStream.toString("UTF-8");
+					// publishProgress("Publishing responses...");
+					//
+					// publishProgress(response);
+					// bytesRead = -1;
+					// } while (bytesRead != -1);
+					// publishProgress("after loop socket in client");
 				} catch (Exception e) {
 					e.printStackTrace();
 					WiFiDirectTestAppActivity.this.addLog(e.toString());
 					response = "Exception " + e.toString();
-				}
 
-				return null;
+				}
 			}
+
+			return null;
+
+			// 8826621278
 		}
 
 		protected void onProgressUpdate(String... params) {

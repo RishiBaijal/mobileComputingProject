@@ -188,6 +188,12 @@
                     android:onClick="onClickGotoWiFiSetting"
                     android:text="@string/button_gotosetting" />
 
+                <EditText
+                    android:id="@+id/string_to_transfer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:hint="Enter the sentence to be transferred here."/>
+
                 <Button
                     android:id="@+id/button1"
                     android:layout_width="wrap_content"

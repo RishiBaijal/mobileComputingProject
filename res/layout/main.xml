@@ -191,8 +191,8 @@
                 <EditText
                     android:id="@+id/string_to_transfer"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" 
-                    android:hint="Enter the sentence to be transferred here."/>
+                    android:layout_height="wrap_content"
+                    android:hint="Enter the sentence to be transferred here." />
 
                 <Button
                     android:id="@+id/button1"
@@ -200,6 +200,12 @@
                     android:layout_height="wrap_content"
                     android:onClick="execAsync"
                     android:text="@string/transfer" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reply" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
